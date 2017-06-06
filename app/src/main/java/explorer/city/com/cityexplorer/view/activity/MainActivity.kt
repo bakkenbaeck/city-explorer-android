@@ -4,11 +4,13 @@ import android.arch.lifecycle.LifecycleActivity
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.util.Log
 import com.jakewharton.rxbinding2.widget.RxTextView
 import explorer.city.com.cityexplorer.R
 import explorer.city.com.cityexplorer.model.SearchItem
-import explorer.city.com.cityexplorer.view.MainActivity
+import explorer.city.com.cityexplorer.view.adapter.SearchAdapter
 import explorer.city.com.cityexplorer.viewModel.MainViewModel
 import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.activity_main.*
@@ -24,6 +26,7 @@ class MainActivity : LifecycleActivity() {
         setContentView(R.layout.activity_main)
 
         initDataObserver()
+        initRecyclerView()
         initSearchView()
     }
 
@@ -31,6 +34,11 @@ class MainActivity : LifecycleActivity() {
         val model: MainViewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
         model.liveSearchResult
                 .observe(this, Observer { updateUi(it) })
+    }
+
+    private fun initRecyclerView() {
+        searchList.layoutManager = LinearLayoutManager(this) as RecyclerView.LayoutManager
+        searchList.adapter = SearchAdapter()
     }
 
     private fun initSearchView() {
@@ -42,14 +50,15 @@ class MainActivity : LifecycleActivity() {
                 .map { it.toString() }
                 .subscribe(
                         { model.search(it) },
-                        { Log.e(MainActivity.TAG, "Error -> $it")}
+                        { Log.e(TAG, "Error -> $it")}
                 )
 
         subscriptions.add(sub)
     }
 
     private fun updateUi(cities: List<SearchItem>?) {
-        Log.d(MainActivity.TAG, "updateUi -> ${cities?.size}")
+        val adapter: SearchAdapter = searchList.adapter as SearchAdapter
+        adapter.addItems(cities)
     }
 
     override fun onDestroy() {
