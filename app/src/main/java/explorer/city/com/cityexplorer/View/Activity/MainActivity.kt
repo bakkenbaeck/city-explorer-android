@@ -1,13 +1,16 @@
-package explorer.city.com.cityexplorer.View
+package explorer.city.com.cityexplorer.View.Activity
 
 import android.arch.lifecycle.LifecycleActivity
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.util.Log
 import com.jakewharton.rxbinding2.widget.RxTextView
 import explorer.city.com.cityexplorer.Model.SearchItem
 import explorer.city.com.cityexplorer.R
+import explorer.city.com.cityexplorer.View.Adapter.SearchAdapter
 import explorer.city.com.cityexplorer.ViewModel.MainViewModel
 import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.activity_main.*
@@ -25,8 +28,14 @@ class MainActivity : LifecycleActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        initRecyclerView()
         initDataObserver()
         initSearchView()
+    }
+
+    private fun initRecyclerView() {
+        searchList.layoutManager = LinearLayoutManager(this) as RecyclerView.LayoutManager
+        searchList.adapter = SearchAdapter()
     }
 
     private fun initDataObserver() {
@@ -51,8 +60,9 @@ class MainActivity : LifecycleActivity() {
         subscriptions.add(sub)
     }
 
-    private fun updateUi(cities: List<SearchItem>?) {
-        Log.d(TAG, "updateUi -> ${cities?.size}")
+    private fun updateUi(cities: MutableList<SearchItem>?) {
+        val adapter: SearchAdapter = searchList.adapter as SearchAdapter
+        adapter.addItems(cities)
     }
 
     override fun onDestroy() {

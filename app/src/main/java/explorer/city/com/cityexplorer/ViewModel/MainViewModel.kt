@@ -5,7 +5,7 @@ import android.arch.lifecycle.ViewModel
 import android.util.Log
 import explorer.city.com.cityexplorer.Model.SearchItem
 import explorer.city.com.cityexplorer.Network.TeleportService
-import explorer.city.com.cityexplorer.View.MainActivity
+import explorer.city.com.cityexplorer.View.Activity.MainActivity
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
