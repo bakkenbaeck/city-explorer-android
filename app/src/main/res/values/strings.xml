@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">CityExplorer</string>
+    <string name="search_for_cities">Search for cities</string>
 </resources>
