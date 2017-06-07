@@ -3,6 +3,7 @@ package explorer.city.com.cityexplorer.view.activity
 import android.arch.lifecycle.LifecycleActivity
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
@@ -10,6 +11,7 @@ import android.util.Log
 import com.jakewharton.rxbinding2.widget.RxTextView
 import explorer.city.com.cityexplorer.R
 import explorer.city.com.cityexplorer.model.SearchItem
+import explorer.city.com.cityexplorer.view.listener.OnItemClickListener
 import explorer.city.com.cityexplorer.view.adapter.SearchAdapter
 import explorer.city.com.cityexplorer.viewModel.MainViewModel
 import io.reactivex.disposables.CompositeDisposable
@@ -38,7 +40,14 @@ class MainActivity : LifecycleActivity() {
 
     private fun initRecyclerView() {
         searchList.layoutManager = LinearLayoutManager(this) as RecyclerView.LayoutManager
-        searchList.adapter = SearchAdapter()
+        val adapter = SearchAdapter(OnItemClickListener<String> { gotoViewCityActivity(it) })
+        searchList.adapter = adapter
+    }
+
+    private fun gotoViewCityActivity(cityLink: String) {
+        val intent: Intent = Intent(this, ViewCityActivity::class.java)
+                .putExtra(ViewCityActivity.CITY_LINK, cityLink)
+        startActivity(intent)
     }
 
     private fun initSearchView() {
