@@ -11,8 +11,8 @@ import android.util.Log
 import com.jakewharton.rxbinding2.widget.RxTextView
 import explorer.city.com.cityexplorer.R
 import explorer.city.com.cityexplorer.model.SearchItem
-import explorer.city.com.cityexplorer.view.listener.OnItemClickListener
 import explorer.city.com.cityexplorer.view.adapter.SearchAdapter
+import explorer.city.com.cityexplorer.view.listener.OnItemClickListener
 import explorer.city.com.cityexplorer.viewModel.MainViewModel
 import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.activity_main.*
@@ -61,6 +61,8 @@ class MainActivity : LifecycleActivity() {
                         { model.search(it) },
                         { Log.e(TAG, "Error -> $it")}
                 )
+
+        model.search("")
 
         subscriptions.add(sub)
     }
