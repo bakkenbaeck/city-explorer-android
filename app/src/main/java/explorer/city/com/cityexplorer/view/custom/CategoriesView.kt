@@ -1,14 +1,18 @@
 package explorer.city.com.cityexplorer.view.custom
 
+import android.animation.ObjectAnimator
 import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.util.AttributeSet
 import android.view.View
+import android.view.animation.DecelerateInterpolator
 import android.widget.LinearLayout
 import explorer.city.com.cityexplorer.R
 import explorer.city.com.cityexplorer.model.ScoreCategory
 import kotlinx.android.synthetic.main.view__category.view.*
+
+
 
 class CategoriesView: LinearLayout {
     constructor(context: Context?) : this(context, null){
@@ -38,8 +42,15 @@ class CategoriesView: LinearLayout {
         val layout: LinearLayout = View.inflate(context, R.layout.view__category, null) as LinearLayout
         layout.title.text = category.name
         layout.score.text = String.format("%.0f", category.score)
-        layout.scoreBar.progress = (category.score * 10).toInt()
         layout.scoreBar.progressTintList = ColorStateList.valueOf(Color.parseColor(category.color))
+        animateScoreBar(layout, category)
         addView(layout)
+    }
+
+    private fun animateScoreBar(layout: LinearLayout, category: ScoreCategory) {
+        val animation = ObjectAnimator.ofInt(layout.scoreBar, "progress", (category.score * 10).toInt())
+        animation.duration = 1000
+        animation.interpolator = DecelerateInterpolator()
+        animation.start()
     }
 }
