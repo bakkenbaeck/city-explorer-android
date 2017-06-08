@@ -46,7 +46,7 @@ class MainActivity : LifecycleActivity() {
 
     private fun gotoViewCityActivity(cityLink: String) {
         val intent: Intent = Intent(this, ViewCityActivity::class.java)
-                .putExtra(ViewCityActivity.CITY_LINK, cityLink)
+                .putExtra(ViewCityActivity.CITY_URL, cityLink)
         startActivity(intent)
     }
 

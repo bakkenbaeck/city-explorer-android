@@ -8,5 +8,11 @@ data class Links(
         @Json(name = "city:urban_area")
         val urbanArea: Link,
         @Json(name = "city:country")
-        val country : Link
+        val country: Link,
+        @Json(name = "ua:images")
+        val image: Link,
+        @Json(name = "ua:salaries")
+        val salaries: Link,
+        @Json(name = "ua:scores")
+        val scores: Link
 )

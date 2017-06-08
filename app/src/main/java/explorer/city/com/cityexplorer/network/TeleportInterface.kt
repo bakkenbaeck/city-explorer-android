@@ -2,6 +2,7 @@ package explorer.city.com.cityexplorer.network
 
 import explorer.city.com.cityexplorer.model.CityInfo
 import explorer.city.com.cityexplorer.model.CitySearch
+import explorer.city.com.cityexplorer.model.Photos
 import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -14,4 +15,7 @@ interface TeleportInterface {
 
     @GET
     fun getCityInfo(@Url url: String): Single<CityInfo>
+
+    @GET
+    fun getImage(@Url url: String): Single<Photos>
 }
