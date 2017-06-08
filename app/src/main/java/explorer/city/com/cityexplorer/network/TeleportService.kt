@@ -10,7 +10,7 @@ import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
 
-class TeleportService {
+object TeleportService {
 
     val telegramInterface: TeleportInterface by lazy { initClient() }
 
@@ -32,6 +32,8 @@ class TeleportService {
     }
 
     private fun addLoggingInterceptor(): HttpLoggingInterceptor {
-        return HttpLoggingInterceptor(LoggingInterceptor())
+        val interceptor = HttpLoggingInterceptor()
+        interceptor.level = HttpLoggingInterceptor.Level.BODY
+        return interceptor
     }
 }

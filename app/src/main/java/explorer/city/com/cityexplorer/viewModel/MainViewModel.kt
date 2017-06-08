@@ -22,7 +22,7 @@ class MainViewModel: ViewModel() {
     }
 
     private fun searchCities(query: String) {
-        val sub = TeleportService()
+        val sub = TeleportService
                 .telegramInterface
                 .searchCities(query)
                 .map { it?.embedded }

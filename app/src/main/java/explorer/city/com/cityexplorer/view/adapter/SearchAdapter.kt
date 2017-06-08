@@ -5,11 +5,13 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import explorer.city.com.cityexplorer.R
 import explorer.city.com.cityexplorer.model.SearchItem
+import explorer.city.com.cityexplorer.view.listener.OnItemClickListener
 import explorer.city.com.cityexplorer.view.adapter.viewHolder.SearchViewHolder
 
-class SearchAdapter : RecyclerView.Adapter<SearchViewHolder>() {
+class SearchAdapter(listener: OnItemClickListener<String>) : RecyclerView.Adapter<SearchViewHolder>() {
 
     private val results by lazy { mutableListOf<SearchItem>() }
+    private val onItemClickListener = listener
 
     fun addItems(items: List<SearchItem>?) {
         if (items == null) return
@@ -26,6 +28,7 @@ class SearchAdapter : RecyclerView.Adapter<SearchViewHolder>() {
     override fun onBindViewHolder(vh: SearchViewHolder, position: Int) {
         val city = results[position]
         vh.setSearchResult(city)
+                .setOnItemClickListener(onItemClickListener, city.links.link.href)
     }
 
     override fun getItemCount(): Int {
