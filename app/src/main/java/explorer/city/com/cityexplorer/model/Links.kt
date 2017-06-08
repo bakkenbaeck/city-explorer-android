@@ -17,5 +17,4 @@ data class Links(
         val scores: Link,
         @Json(name = "ua:details")
         val details: Link
-
 )
