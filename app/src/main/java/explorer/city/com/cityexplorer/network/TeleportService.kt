@@ -32,6 +32,8 @@ object TeleportService {
     }
 
     private fun addLoggingInterceptor(): HttpLoggingInterceptor {
-        return HttpLoggingInterceptor(LoggingInterceptor())
+        val interceptor = HttpLoggingInterceptor()
+        interceptor.level = HttpLoggingInterceptor.Level.BODY
+        return interceptor
     }
 }

@@ -1,6 +1,7 @@
 package explorer.city.com.cityexplorer.network
 
 import explorer.city.com.cityexplorer.model.CityInfo
+import explorer.city.com.cityexplorer.model.CityScore
 import explorer.city.com.cityexplorer.model.CitySearch
 import explorer.city.com.cityexplorer.model.Photos
 import io.reactivex.Single
@@ -18,4 +19,7 @@ interface TeleportInterface {
 
     @GET
     fun getImage(@Url url: String): Single<Photos>
+
+    @GET
+    fun getCityScore(@Url url: String): Single<CityScore>
 }

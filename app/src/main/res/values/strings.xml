@@ -2,4 +2,7 @@
     <string name="app_name">CityExplorer</string>
     <string name="search_for_cities">Search for cities</string>
     <string name="population">Population: %s</string>
+    <string name="teleport_score">Score: %s / 100</string>
+    <string name="category_score">%1$s: %2$s</string>
+    <string name="scores_info">Scores are from 1-10</string>
 </resources>
