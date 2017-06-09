@@ -1,20 +1,17 @@
 package explorer.city.com.cityexplorer.view.custom
 
-import android.animation.ObjectAnimator
 import android.content.Context
-import android.content.res.ColorStateList
-import android.graphics.Color
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.util.AttributeSet
-import android.view.View
-import android.view.animation.DecelerateInterpolator
-import android.widget.LinearLayout
 import explorer.city.com.cityexplorer.R
 import explorer.city.com.cityexplorer.model.ScoreCategory
-import kotlinx.android.synthetic.main.view__category.view.*
+import explorer.city.com.cityexplorer.view.adapter.CategoryAdapter
+import explorer.city.com.cityexplorer.view.listener.OnItemClickListener
 
 
+class CategoriesView: RecyclerView {
 
-class CategoriesView: LinearLayout {
     constructor(context: Context?) : this(context, null){
         init()
     }
@@ -29,28 +26,19 @@ class CategoriesView: LinearLayout {
 
     private fun init() {
         inflate(context, R.layout.view_categories, this)
-        orientation = VERTICAL
+        initRecyclerView()
     }
 
-    fun setCategories(categories: List<ScoreCategory>?) {
-        categories?.forEach {
-            addCategoryView(it)
-        }
+    private fun initRecyclerView() {
+        layoutManager = LinearLayoutManager(context)
     }
 
-    private fun addCategoryView(category: ScoreCategory) {
-        val layout: LinearLayout = View.inflate(context, R.layout.view__category, null) as LinearLayout
-        layout.title.text = category.name
-        layout.score.text = String.format("%.0f", category.score)
-        layout.scoreBar.progressTintList = ColorStateList.valueOf(Color.parseColor(category.color))
-        animateScoreBar(layout, category)
-        addView(layout)
+    fun addItems(categories: List<ScoreCategory>?) {
+        val adapter = adapter as CategoryAdapter
+        adapter.addItems(categories)
     }
 
-    private fun animateScoreBar(layout: LinearLayout, category: ScoreCategory) {
-        val animation = ObjectAnimator.ofInt(layout.scoreBar, "progress", (category.score * 10).toInt())
-        animation.duration = 1000
-        animation.interpolator = DecelerateInterpolator()
-        animation.start()
+    fun setOnItemClickListener(listener: OnItemClickListener<String>) {
+        adapter = CategoryAdapter(listener)
     }
 }
