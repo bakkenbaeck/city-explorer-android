@@ -20,7 +20,7 @@ class CategoryAdapter(listener: OnItemClickListener<String>): RecyclerView.Adapt
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.list_item__detail, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.list_item__category, parent, false)
         return CategoryViewHolder(view)
     }
 

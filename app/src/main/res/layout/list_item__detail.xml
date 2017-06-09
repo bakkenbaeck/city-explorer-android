@@ -1,45 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="52dp"
-    android:orientation="horizontal"
-    android:paddingRight="@dimen/vertical_margin"
-    android:paddingLeft="@dimen/vertical_margin"
     android:gravity="center_vertical"
-    android:background="?android:selectableItemBackground">
+    android:paddingLeft="@dimen/horizontal_margin"
+    android:paddingRight="@dimen/horizontal_margin">
 
     <TextView
-        android:id="@+id/title"
+        android:id="@+id/detail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="16sp"
         android:textColor="@color/primaryTextColor"
-        tools:text="Category Title"/>
+        android:autoLink="web"/>
 
-    <android.support.v4.widget.Space
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_weight="1"/>
-
-    <ProgressBar
-        android:id="@+id/scoreBar"
-        android:layout_width="180dp"
-        android:layout_height="15dp"
-        style="@android:style/Widget.Material.ProgressBar.Horizontal"
-        android:progressDrawable="@drawable/score_progressbar_drawable"
-        tools:progress="25" />
-
-    <android.support.v4.widget.Space
-        android:layout_width="16dp"
-        android:layout_height="0dp" />
-
-    <TextView
-        android:id="@+id/score"
-        android:layout_width="20dp"
-        android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:textColor="@color/primaryTextColor"
-        tools:text="10"/>
 </LinearLayout>

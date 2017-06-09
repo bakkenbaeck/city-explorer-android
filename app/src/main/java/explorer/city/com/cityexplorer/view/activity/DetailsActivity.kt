@@ -4,8 +4,10 @@ import android.arch.lifecycle.LifecycleActivity
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
+import android.support.v7.widget.LinearLayoutManager
 import explorer.city.com.cityexplorer.R
 import explorer.city.com.cityexplorer.model.CityDetail
+import explorer.city.com.cityexplorer.view.adapter.DetailsAdapter
 import explorer.city.com.cityexplorer.viewModel.DetailsViewModel
 import kotlinx.android.synthetic.main.activity_details.*
 
@@ -22,6 +24,7 @@ class DetailsActivity : LifecycleActivity() {
 
         initClickListeners()
         initToolbar()
+        initRecyclerView()
         initObservers()
         getDetails()
     }
@@ -34,12 +37,20 @@ class DetailsActivity : LifecycleActivity() {
         toolbarTitle.text = getCategoryName()
     }
 
+    private fun initRecyclerView() {
+        detailsList.layoutManager = LinearLayoutManager(this)
+        detailsList.adapter = DetailsAdapter()
+    }
+
     private fun initObservers() {
         val model = ViewModelProviders.of(this).get(DetailsViewModel::class.java)
         model.liveDetails.observe(this, Observer { updateDetailsUi(it) })
     }
 
-    private fun updateDetailsUi(cityDetails: List<CityDetail>?) {}
+    private fun updateDetailsUi(cityDetails: List<CityDetail>?) {
+        val adapter: DetailsAdapter = detailsList.adapter as DetailsAdapter
+        adapter.setItems(cityDetails)
+    }
 
     private fun getDetails() {
         val model = ViewModelProviders.of(this).get(DetailsViewModel::class.java)
