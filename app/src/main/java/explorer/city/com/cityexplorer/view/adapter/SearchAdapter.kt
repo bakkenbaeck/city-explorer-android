@@ -5,8 +5,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import explorer.city.com.cityexplorer.R
 import explorer.city.com.cityexplorer.model.SearchItem
-import explorer.city.com.cityexplorer.view.listener.OnItemClickListener
 import explorer.city.com.cityexplorer.view.adapter.viewHolder.SearchViewHolder
+import explorer.city.com.cityexplorer.view.listener.OnItemClickListener
 
 class SearchAdapter(listener: OnItemClickListener<String>) : RecyclerView.Adapter<SearchViewHolder>() {
 
@@ -14,13 +14,12 @@ class SearchAdapter(listener: OnItemClickListener<String>) : RecyclerView.Adapte
     private val onItemClickListener = listener
 
     fun addItems(items: List<SearchItem>?) {
-        if (items == null) return
         results.clear()
-        results.addAll(items)
+        items?.let { results.addAll(it) }
         notifyDataSetChanged()
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, p1: Int): SearchViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.list_item__search_result, parent, false)
         return SearchViewHolder(view)
     }

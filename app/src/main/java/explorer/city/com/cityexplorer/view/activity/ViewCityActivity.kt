@@ -11,6 +11,7 @@ import explorer.city.com.cityexplorer.model.CityInfo
 import explorer.city.com.cityexplorer.model.CityScore
 import explorer.city.com.cityexplorer.model.Photo
 import explorer.city.com.cityexplorer.model.Photos
+import explorer.city.com.cityexplorer.view.listener.OnItemClickListener
 import explorer.city.com.cityexplorer.viewModel.ViewCityViewModel
 import kotlinx.android.synthetic.main.activity_view_city.*
 
@@ -31,6 +32,7 @@ class ViewCityActivity : LifecycleActivity() {
 
     private fun initClickListeners() {
         backArrow.setOnClickListener { finish() }
+        categoriesView.setOnItemClickListener(OnItemClickListener<String> {  })
     }
 
     private fun initDataObservers() {
@@ -59,7 +61,7 @@ class ViewCityActivity : LifecycleActivity() {
         val score = String.format("%.2f", cityScore?.cityScore ?: 0)
         teleportScore.text = getString(R.string.teleport_score, score)
         summary.text = Html.fromHtml(cityScore?.summary)
-        categoriesView.setCategories(cityScore?.categories)
+        categoriesView.addItems(cityScore?.categories)
     }
 
     private fun updateImageUi(photos: Photos?) {
