@@ -31,7 +31,7 @@ class ViewCityActivity : LifecycleActivity() {
     }
 
     private fun initClickListeners() {
-        backArrow.setOnClickListener { finish() }
+        toolbar.setNavigationOnClickListener { finish() }
         categoriesView.setOnItemClickListener(OnItemClickListener<String> {  })
     }
 
