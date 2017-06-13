@@ -3,6 +3,7 @@ package explorer.city.com.cityexplorer.view.activity
 import android.arch.lifecycle.LifecycleActivity
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
+import android.content.Intent
 import android.os.Bundle
 import android.text.Html
 import com.bumptech.glide.Glide
@@ -32,7 +33,16 @@ class ViewCityActivity : LifecycleActivity() {
 
     private fun initClickListeners() {
         toolbar.setNavigationOnClickListener { finish() }
-        categoriesView.setOnItemClickListener(OnItemClickListener<String> {  })
+        categoriesView.setOnItemClickListener(OnItemClickListener<String> { startDetailActivity(it) })
+    }
+
+    private fun startDetailActivity(category: String) {
+        val model: ViewCityViewModel = ViewModelProviders.of(this).get(ViewCityViewModel::class.java)
+        val detailsUrl: String? = model.liveDetails.value?.links?.details?.href
+        val intent = Intent(this, DetailsActivity::class.java)
+                .putExtra(DetailsActivity.CATEGORY_NAME, category)
+                .putExtra(DetailsActivity.URL, detailsUrl)
+        startActivity(intent)
     }
 
     private fun initDataObservers() {

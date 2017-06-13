@@ -1,9 +1,6 @@
 package explorer.city.com.cityexplorer.network
 
-import explorer.city.com.cityexplorer.model.CityInfo
-import explorer.city.com.cityexplorer.model.CityScore
-import explorer.city.com.cityexplorer.model.CitySearch
-import explorer.city.com.cityexplorer.model.Photos
+import explorer.city.com.cityexplorer.model.*
 import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -22,4 +19,7 @@ interface TeleportInterface {
 
     @GET
     fun getCityScore(@Url url: String): Single<CityScore>
+
+    @GET
+    fun getCityDetails(@Url url: String): Single<Details>
 }

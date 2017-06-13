@@ -17,9 +17,10 @@ class ViewCityViewModel: ViewModel() {
     private val TAG = "ViewCityViewModel"
 
     private val subscriptions by lazy { CompositeDisposable() }
-    val liveCityInfo: MutableLiveData<CityInfo> by lazy { MutableLiveData<CityInfo>() }
-    val liveImageInfo: MutableLiveData<Photos> by lazy { MutableLiveData<Photos>() }
-    val liveCityScore: MutableLiveData<CityScore> by lazy { MutableLiveData<CityScore>() }
+    val liveCityInfo by lazy { MutableLiveData<CityInfo>() }
+    val liveDetails by lazy { MutableLiveData<CityInfo>() }
+    val liveImageInfo by lazy { MutableLiveData<Photos>() }
+    val liveCityScore by lazy { MutableLiveData<CityScore>() }
 
     fun fetchCityInfo(url: String): MutableLiveData<CityInfo> {
         if (shouldFetch()) {
@@ -39,6 +40,8 @@ class ViewCityViewModel: ViewModel() {
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSuccess { liveCityInfo.value = it }
                 .flatMap { getCityInfo(it.links.urbanArea.href) }
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSuccess { liveDetails.value = it }
                 .subscribe(
                         {
                             fetchCityScore(it.links.scores.href)

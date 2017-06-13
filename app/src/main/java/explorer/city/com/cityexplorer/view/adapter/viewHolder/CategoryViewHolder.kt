@@ -8,7 +8,7 @@ import android.view.View
 import android.view.animation.DecelerateInterpolator
 import explorer.city.com.cityexplorer.model.ScoreCategory
 import explorer.city.com.cityexplorer.view.listener.OnItemClickListener
-import kotlinx.android.synthetic.main.list_item__detail.view.*
+import kotlinx.android.synthetic.main.list_item__category.view.*
 
 class CategoryViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
 

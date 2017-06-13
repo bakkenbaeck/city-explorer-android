@@ -14,5 +14,7 @@ data class Links(
         @Json(name = "ua:salaries")
         val salaries: Link,
         @Json(name = "ua:scores")
-        val scores: Link
+        val scores: Link,
+        @Json(name = "ua:details")
+        val details: Link
 )
