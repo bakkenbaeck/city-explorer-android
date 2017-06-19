@@ -9,4 +9,7 @@
 
     <color name="primaryTextColor">#000</color>
     <color name="secondaryTextColor">#333</color>
+    <color name="textColorContrast">#FFF</color>
+
+    <color name="semiTransparentOverlay">#26000000</color>
 </resources>

@@ -3,6 +3,7 @@ package explorer.city.com.cityexplorer.viewModel
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import android.util.Log
+import explorer.city.com.cityexplorer.model.CitySearch
 import explorer.city.com.cityexplorer.model.SearchItem
 import explorer.city.com.cityexplorer.network.TeleportService
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -24,7 +25,7 @@ class MainViewModel: ViewModel() {
     private fun searchCities(query: String) {
         val sub = TeleportService
                 .telegramInterface
-                .searchCities(query)
+                .searchCities(query, CitySearch.EMBEDDED_SEARCH)
                 .map { it?.embedded }
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

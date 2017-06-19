@@ -11,4 +11,6 @@ data class SearchItem(
         val alternateNames: List<AlternateName>,
         @Json(name  = "matching_full_name")
         val fullName: String
-)
+) {
+    fun getCityUrl(): String = links.link.href
+}

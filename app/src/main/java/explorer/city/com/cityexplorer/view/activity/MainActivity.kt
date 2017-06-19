@@ -40,13 +40,13 @@ class MainActivity : LifecycleActivity() {
 
     private fun initRecyclerView() {
         searchList.layoutManager = LinearLayoutManager(this) as RecyclerView.LayoutManager
-        val adapter = SearchAdapter(OnItemClickListener<String> { gotoViewCityActivity(it) })
+        val adapter = SearchAdapter(OnItemClickListener { gotoViewCityActivity(it) })
         searchList.adapter = adapter
     }
 
-    private fun gotoViewCityActivity(cityLink: String) {
+    private fun gotoViewCityActivity(city: SearchItem) {
         val intent: Intent = Intent(this, ViewCityActivity::class.java)
-                .putExtra(ViewCityActivity.CITY_URL, cityLink)
+                .putExtra(ViewCityActivity.CITY_URL, city.getCityUrl())
         startActivity(intent)
     }
 
@@ -69,7 +69,7 @@ class MainActivity : LifecycleActivity() {
 
     private fun updateUi(cities: List<SearchItem>?) {
         val adapter: SearchAdapter = searchList.adapter as SearchAdapter
-        adapter.addItems(cities)
+        adapter.setItems(cities)
     }
 
     override fun onDestroy() {

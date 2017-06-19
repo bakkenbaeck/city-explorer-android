@@ -6,12 +6,12 @@ import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.os.Bundle
 import android.text.Html
-import com.bumptech.glide.Glide
 import explorer.city.com.cityexplorer.R
 import explorer.city.com.cityexplorer.model.CityInfo
 import explorer.city.com.cityexplorer.model.CityScore
 import explorer.city.com.cityexplorer.model.Photo
 import explorer.city.com.cityexplorer.model.Photos
+import explorer.city.com.cityexplorer.util.load
 import explorer.city.com.cityexplorer.view.listener.OnItemClickListener
 import explorer.city.com.cityexplorer.viewModel.ViewCityViewModel
 import kotlinx.android.synthetic.main.activity_view_city.*
@@ -76,9 +76,8 @@ class ViewCityActivity : LifecycleActivity() {
 
     private fun updateImageUi(photos: Photos?) {
         val photo: Photo? = photos?.photos?.get(0)
-        Glide
-                .with(this)
-                .load(photo?.image?.web)
-                .into(cityImage)
+        photo?.getImage()?.let {
+            cityImage.load(it)
+        }
     }
 }
