@@ -8,5 +8,7 @@ data class CityInfo(
         @Json(name = "full_name")
         val fullName: String,
         val name: String,
-        val population: Int
+        val population: Int,
+        @Json(name = "_embedded")
+        val embeddedUrbanArea: EmbeddedUrbanArea?
 )
